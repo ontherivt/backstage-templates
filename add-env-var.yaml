@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1beta2
 kind: Template
 # some metadata about the template itself
 metadata:
-  name: fastapi-template
+  name: add_env-var
   title: AWS Env Vars
   description: Adds environment variables to your project and re-deploys.
   tags:
