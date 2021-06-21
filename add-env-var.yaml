@@ -1,0 +1,76 @@
+apiVersion: backstage.io/v1beta2
+kind: Template
+# some metadata about the template itself
+metadata:
+  name: fastapi-template
+  title: AWS Env Vars
+  description: Adds environment variables to your project and re-deploys.
+  tags:
+    - poc
+    - infrastructure
+spec:
+  owner: outside/devops
+  type: service
+  parameters:
+    - title: Add/update Environment Variables
+      required:
+        - serviceName
+        - environment
+        - key
+        - value
+      properties:
+        serviceName:
+          title: Service Name
+          type: string
+          description: The slug of the service you want to update
+          ui:autofocus: true
+          ui:options:
+            rows: 1
+        environment:
+          title: Environment
+          type: string
+          default: dev
+          enum: ["dev", "prod"]
+          description: Which environment do you want to update?
+        role:
+          title: Role
+          type: string
+          default: web
+          enum: ["web", "worker"]
+          description: Which role task needs to be updated to use the var?
+        key:
+          title: Key
+          type: string
+          description: The key you want to update (typically all caps like DB_USER)
+        value:
+          title: Value
+          type: string
+          description: The value you want assigned to the key
+    - title: Choose a location
+      required:
+        - repoUrl
+        - description
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+        description:
+          title: Repo description
+          type: string
+
+
+  steps:
+    - id: add-param
+      action: outside:aws-add-param
+      name: Add the parameter and re-deploy
+      input:
+        values:
+          serviceName: '{{ parameters.serviceName }}'
+          environment: '{{ parameters.environment }}'
+          role: '{{ parameters.role }}'
+          key: '{{ parameters.key }}'
+          value: '{{ parameters.value }}'
