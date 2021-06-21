@@ -46,21 +46,6 @@ spec:
           title: Value
           type: string
           description: The value you want assigned to the key
-    - title: Choose a location
-      required:
-        - repoUrl
-        - description
-      properties:
-        repoUrl:
-          title: Repository Location
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
-        description:
-          title: Repo description
-          type: string
 
 
   steps:
