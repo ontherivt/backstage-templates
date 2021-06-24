@@ -9,7 +9,7 @@ metadata:
     - poc
     - infrastructure
 spec:
-  owner: outside/recsys
+  owner: outside/rivt
   type: service
   # templater: cookiecutter # this will come in handy for creating python projects from template repos
   # these are the steps which are rendered in the frontend with the form input
